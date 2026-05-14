@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./index.css">
+</head>
+<body>
+    <div class="full-container">
+        <div class="div1"></div>
+
+        <div id="newInput">
+            <input type="text" id="name" required>
+            <button id="btn">UPLOAD</button>
+        </div>
+
+        <div id="div2">
+            <div id="child-div2"></div>
+        </div>
+    </div>
+    <script>
+        var inp_value=document.getElementById("name")
+        var new_btn=document.getElementById("btn")
+
+        new_btn.onclick=function add(){
+            var dup_input=document.createElement("span")
+            dup_input.innerText=inp_value.value
+            dup_input.className="dup-input"
+
+            var new_btn_dlt=document.createElement("button")
+            new_btn_dlt.innerText="DELETE"
+            new_btn_dlt.className="delete-btn"
+
+            new_btn_dlt.onclick=function add1(){
+                new_btn_dlt.remove()
+                var new_btn_undo=document.createElement("button")
+                new_btn_undo.innerText="UNDO"
+                new_btn_undo.className="undo-btn"
+
+                var new_btn_per_dlt=document.createElement("button")
+                new_btn_per_dlt.innerText="Permanent Delete"
+                new_btn_per_dlt.className="per-dlt-btn"
+
+                document.getElementById("child-div2").append(dup_input,new_btn_undo,new_btn_per_dlt)
+
+                new_btn_undo.onclick=function add2(){
+                    new_btn_per_dlt.remove()
+                    new_btn_undo.remove()
+                    document.getElementById("newInput").append(dup_input,new_btn_dlt)
+                }
+                new_btn_per_dlt.onclick=function add3(){
+                    inp_value.value=""
+                    new_btn_dlt.remove()
+                    dup_input.remove()
+                    new_btn_undo.remove()
+                    new_btn_per_dlt.remove()
+                }
+            }
+            document.getElementById("newInput").append(dup_input,new_btn_dlt)
+        }
+        document.getElementById("newInput").append(inp_value,new_btn)
+    </script>
+</body>
+</html>
